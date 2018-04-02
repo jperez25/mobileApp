@@ -11,8 +11,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    //dwfsd
-    //dsfsdf
-    //sdfsd
-    //sdfsdf
+    //xxada
 }
