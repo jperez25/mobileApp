@@ -16,25 +16,27 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="53dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_launcher_background"
+        android:onClick="play"
+        android:src="@mipmap/back_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/deckPlayer"
         android:layout_width="53dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_launcher_background"
+        android:onClick="play"
+        android:src="@mipmap/back_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imgCom"
         android:layout_width="45dp"
         android:layout_height="66dp"
         android:src="@color/colorAccent"
@@ -59,7 +61,7 @@
         app:layout_constraintVertical_bias="0.559" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imgPlayer"
         android:layout_width="45dp"
         android:layout_height="66dp"
         android:src="@color/colorPrimaryDark"
@@ -96,34 +98,35 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/computerText"
         android:layout_width="87dp"
         android:layout_height="33dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Com Y"
+        android:layout_marginTop="8dp"
+        android:text="Computer"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/playerText"
         android:layout_width="87dp"
         android:layout_height="33dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Me X"
+        android:text="@string/player_deck_size"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.633"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="462dp" />
-
+        app:layout_constraintEnd_toStartOf="@+id/deckPlayer"
+        app:layout_constraintHorizontal_bias="0.637"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
