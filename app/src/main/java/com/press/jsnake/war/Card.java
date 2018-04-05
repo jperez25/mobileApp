@@ -49,6 +49,9 @@ public class Card {
     public String toString() {
         return ranks[rank] + " of " + suits[suit];
     }
+    public String toResourceString() {
+        return ranks[rank] + "_of_" + suits[suit];
+    }
 
     /** Returns a negative number if this object is lower in rank than c,
      *   0 if the cards are equal rank, and a positive number if this object

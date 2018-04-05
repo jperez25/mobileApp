@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         str = "Computer " + comDeck.size();
         computer.setText(str);
 
+        playerDeck.shuffle();
+        comDeck.shuffle();
+
     }
 
 
