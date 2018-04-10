@@ -6,11 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         currentComCard = comDeck.draw();
         playerCard.setText(currentPlayerCard.toString());
         comCard.setText(currentComCard.toString());
+        ImageView playerCardImg = new ImageView();
+
+        int cardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
+        playerCardImg.setImageResource(cardId);
         battle();
     }
 
