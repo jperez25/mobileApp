@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("CardID", "card id: " + String.valueOf(playerCardId));
         playerCardImg.setImageResource(playerCardId);
         comCardImg.setImageResource(comCardId);
+        playerCardImg.setVisibility(View.VISIBLE);
+        comCardImg.setVisibility(View.VISIBLE);
         battle();
     }
 
