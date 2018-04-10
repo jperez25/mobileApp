@@ -208,14 +208,46 @@ public class MainActivity extends AppCompatActivity {
             cards.add(playerDeck.draw());
             cards.add(comDeck.draw());
         }
+
+        //draw two more cards
+        Card currentComCard = playerDeck.draw();
+        Card currentPlayerCard = comDeck.draw();
+
+        //set text
         String str = "Player " + playerDeck.size();
         player.setText(str);
 
         str = "Computer " + comDeck.size();
         computer.setText(str);
 
+        //battle
+        // Do the battle
+        if (currentPlayerCard.compareRank(currentComCard) > 0) {
+            // player wins
+            //move cards to player deck
 
+            playerDeck.add(currentPlayerCard);
+            playerDeck.add(currentComCard);
+            for (Card x: cards) {
+                playerDeck.add(x);
+            }
+            Log.d("win", "battle: Player Wins");
+        } else if (currentPlayerCard.compareRank(currentComCard) == 0){
+            //if double tied, we are fucked
+            iftied();
+            Log.d("win", "battle: Player ties");
+        } else {
+            // com wins
 
+            comDeck.add(currentPlayerCard);
+            comDeck.add(currentComCard);
+            for (Card x: cards) {
+                playerDeck.add(x);
+            }
+            Log.d("win", "battle: Player loses");
+        }
+        str = "Player " + playerDeck.size();
+        player.setText(str);
     }
 
 
