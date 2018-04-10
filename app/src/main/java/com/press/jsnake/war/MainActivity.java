@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Card currentPlayerCard;
     Card currentComCard;
     ImageView playerCardImg;
+    ImageView comCardImg;
 
 
 
@@ -54,20 +55,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         playerCardImg = findViewById(R.id.playerCardImg);
+        comCardImg = findViewById(R.id.comCardImg);
     }
 
     public void play(View view) {
-        TextView playerCard = findViewById(R.id.playerCard);
-        TextView comCard = findViewById(R.id.comCard);
+//        TextView playerCard = findViewById(R.id.playerCard);
+//        TextView comCard = findViewById(R.id.comCard);
 
         currentPlayerCard = playerDeck.draw();
         currentComCard = comDeck.draw();
-        playerCard.setText(currentPlayerCard.toString());
-        comCard.setText(currentComCard.toString());
+//        playerCard.setText(currentPlayerCard.toString());
+//        comCard.setText(currentComCard.toString());
 //
-        int cardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
-        Log.d("CardID", "card id: " + String.valueOf(cardId));
-        playerCardImg.setImageResource(cardId);
+        int playerCardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
+        int comCardId = getResources().getIdentifier(currentComCard.toResourceString(), "drawable", getPackageName());
+//        Log.d("CardID", "card id: " + String.valueOf(playerCardId));
+        playerCardImg.setImageResource(playerCardId);
+        comCardImg.setImageResource(comCardId);
         battle();
     }
 
