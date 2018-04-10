@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class start extends AppCompatActivity {
+public class Start extends AppCompatActivity {
 
 
 
@@ -20,8 +20,8 @@ public class start extends AppCompatActivity {
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(start.this, MainActivity.class);
-                start.this.startActivity(myIntent);
+                Intent myIntent = new Intent(Start.this, MainActivity.class);
+                Start.this.startActivity(myIntent);
             }
         });
 
