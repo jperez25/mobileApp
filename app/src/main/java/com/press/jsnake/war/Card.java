@@ -50,7 +50,36 @@ public class Card {
         return ranks[rank] + " of " + suits[suit];
     }
     public String toResourceString() {
-        return ranks[rank] + "_of_" + suits[suit];
+        String str = "";
+        switch(rank) {
+            case 2: str = "two";
+                    break;
+            case 3: str = "three";
+                    break;
+            case 4: str = "four";
+                break;
+            case 5: str = "five";
+                break;
+            case 6: str = "six";
+                break;
+            case 7: str = "seven";
+                break;
+            case 8: str = "eight";
+                break;
+            case 9: str = "nine";
+                break;
+            case 10: str = "ten";
+                break;
+            case 11: str = "jack";
+                break;
+            case 12: str = "queen";
+                break;
+            case 13: str = "king";
+                break;
+            case 14: str = "ace";
+                break;
+        }
+        return str + "_of_" + suits[suit];
     }
 
     /** Returns a negative number if this object is lower in rank than c,
