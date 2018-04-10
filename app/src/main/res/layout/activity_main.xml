@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.press.jsnake.war.Start"
     android:background="@color/colorTable"
-    android:id="@+id/layout">
+    android:id="@+id/layout"
+    >
 
 
     <fragment

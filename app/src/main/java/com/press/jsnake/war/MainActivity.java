@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Card currentComCard;
     ImageView playerCardImg;
     ImageView comCardImg;
+    boolean isReadyforBattle;
+    LinkedList<Card> cards;
 
 
 
@@ -61,40 +63,50 @@ public class MainActivity extends AppCompatActivity {
         str += " " + comDeck.size();
         computer.setText(str);
 
-
+        isReadyforBattle = false;
         playerCardImg = findViewById(R.id.playerCardImg);
         comCardImg = findViewById(R.id.comCardImg);
     }
 
     public void play(View view) {
-        //set imageviews to their respective places
-        playerCardImg.setX(1200);
-        playerCardImg.setY(1600);
 
-        comCardImg.setX(100);
-        comCardImg.setY(100);
+
+
+        if (isReadyforBattle){
+            battle();
+            isReadyforBattle = false;
+        }
+        else{
+            //set imageviews to their respective places
+            playerCardImg.setX(1200);
+            playerCardImg.setY(1600);
+
+
+
+            comCardImg.setX(100);
+            comCardImg.setY(100);
 //        TextView playerCard = findViewById(R.id.playerCard);
 //        TextView comCard = findViewById(R.id.comCard);
 
-        currentPlayerCard = playerDeck.draw();
-        currentComCard = comDeck.draw();
+            currentPlayerCard = playerDeck.draw();
+            currentComCard = comDeck.draw();
 //        playerCard.setText(currentPlayerCard.toString());
 //        comCard.setText(currentComCard.toString());
 //
-        int playerCardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
-        int comCardId = getResources().getIdentifier(currentComCard.toResourceString(), "drawable", getPackageName());
+            int playerCardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
+            int comCardId = getResources().getIdentifier(currentComCard.toResourceString(), "drawable", getPackageName());
 //        Log.d("CardID", "card id: " + String.valueOf(playerCardId));
-        playerCardImg.setImageResource(playerCardId);
-        comCardImg.setImageResource(comCardId);
+            playerCardImg.setImageResource(playerCardId);
+            comCardImg.setImageResource(comCardId);
 
-        playerCardImg.setVisibility(View.VISIBLE);
-        comCardImg.setVisibility(View.VISIBLE);
+            playerCardImg.setVisibility(View.VISIBLE);
+            comCardImg.setVisibility(View.VISIBLE);
 
 
-       playAnimation(playerCardImg, 0);
-       playAnimation(comCardImg, 1);
-
-        battle();
+            playAnimation(playerCardImg, 0);
+            playAnimation(comCardImg, 1);
+            isReadyforBattle = true;
+        }
     }
 
     public void battle() {
@@ -144,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         str = "Computer " + comDeck.size();
         computer.setText(str);
 
-        playerDeck.shuffle();
+       playerDeck.shuffle();
         comDeck.shuffle();
 
     }
@@ -202,16 +214,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void iftied(){
-        LinkedList<Card> cards = new LinkedList<>();
+        cards = new LinkedList<>();
         //draw three cards and put them on hold
+        Log.d("Card drawn", "Card Drawnxcjhvx");
         for(int i = 0; i < 3; i++){
+            Log.d("Card drawn", "Card Drawn");
             cards.add(playerDeck.draw());
             cards.add(comDeck.draw());
         }
 
         //draw two more cards
-        Card currentComCard = playerDeck.draw();
-        Card currentPlayerCard = comDeck.draw();
+        Card cComCard = playerDeck.draw();
+        Card cPlayerCard = comDeck.draw();
 
         //set text
         String str = "Player " + playerDeck.size();
@@ -222,17 +236,19 @@ public class MainActivity extends AppCompatActivity {
 
         //battle
         // Do the battle
-        if (currentPlayerCard.compareRank(currentComCard) > 0) {
+        if (cPlayerCard.compareRank(cComCard) > 0) {
             // player wins
             //move cards to player deck
 
             playerDeck.add(currentPlayerCard);
             playerDeck.add(currentComCard);
+            playerDeck.add(cPlayerCard);
+            playerDeck.add(cComCard);
             for (Card x: cards) {
                 playerDeck.add(x);
             }
             Log.d("win", "battle: Player Wins");
-        } else if (currentPlayerCard.compareRank(currentComCard) == 0){
+        } else if (cPlayerCard.compareRank(cComCard) == 0){
             //if double tied, we are fucked
             iftied();
             Log.d("win", "battle: Player ties");
@@ -241,6 +257,8 @@ public class MainActivity extends AppCompatActivity {
 
             comDeck.add(currentPlayerCard);
             comDeck.add(currentComCard);
+            comDeck.add(cPlayerCard);
+            comDeck.add(cComCard);
             for (Card x: cards) {
                 playerDeck.add(x);
             }
@@ -248,6 +266,9 @@ public class MainActivity extends AppCompatActivity {
         }
         str = "Player " + playerDeck.size();
         player.setText(str);
+
+        str = "Computer " + comDeck.size();
+        computer.setText(str);
     }
 
 
