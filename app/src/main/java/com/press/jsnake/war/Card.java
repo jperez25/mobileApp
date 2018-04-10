@@ -49,6 +49,7 @@ public class Card {
     public String toString() {
         return ranks[rank] + " of " + suits[suit];
     }
+
     public String toResourceString() {
         String str = "";
         switch(rank) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-//    LinkedList<Integer> deck = new LinkedList<>();
+    //    LinkedList<Integer> deck = new LinkedList<>();
     Deck comDeck;
     Deck playerDeck;
     TextView player;

@@ -29,6 +29,6 @@ class SetImageHelper {
 
         }
 
-        return ""
+        return "ic_launcher_background"
     }
 }
