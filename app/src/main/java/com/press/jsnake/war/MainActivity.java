@@ -16,11 +16,13 @@ public class MainActivity extends AppCompatActivity {
     TextView computer;
     Card currentPlayerCard;
     Card currentComCard;
+    ImageView playerCardImg;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         str = computer.getText().toString();
         str += " " + comDeck.size();
         computer.setText(str);
+
+
+        playerCardImg = findViewById(R.id.playerCardImg);
     }
 
     public void play(View view) {
@@ -59,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
         currentComCard = comDeck.draw();
         playerCard.setText(currentPlayerCard.toString());
         comCard.setText(currentComCard.toString());
-        ImageView playerCardImg = new ImageView();
-
+//
         int cardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
+        Log.d("CardID", "card id: " + String.valueOf(cardId));
         playerCardImg.setImageResource(cardId);
         battle();
     }
