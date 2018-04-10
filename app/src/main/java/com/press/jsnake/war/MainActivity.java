@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
 
     //    LinkedList<Integer> deck = new LinkedList<>();
@@ -200,10 +202,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void iftied(){
+        LinkedList<Card> cards = new LinkedList<>();
+        //draw three cards and put them on hold
         for(int i = 0; i < 3; i++){
-            currentPlayerCard = playerDeck.draw();
-            currentComCard = comDeck.draw();
+            cards.add(playerDeck.draw());
+            cards.add(comDeck.draw());
         }
+        String str = "Player " + playerDeck.size();
+        player.setText(str);
+
+        str = "Computer " + comDeck.size();
+        computer.setText(str);
+
+
 
     }
 
