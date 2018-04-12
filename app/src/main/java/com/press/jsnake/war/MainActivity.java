@@ -228,10 +228,12 @@ public class MainActivity extends AppCompatActivity {
             cards.add(playerDeck.draw());
             cards.add(comDeck.draw());
         }
+        //execute animation
 
         //draw two more cards
         Card cComCard = playerDeck.draw();
         Card cPlayerCard = comDeck.draw();
+        //execute animation
 
         //set text
         String str = "Player " + playerDeck.size();
