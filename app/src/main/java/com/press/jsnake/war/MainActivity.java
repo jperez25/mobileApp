@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
 
 
-
         if (isReadyforBattle){
             battle();
             isReadyforBattle = false;
@@ -82,25 +81,28 @@ public class MainActivity extends AppCompatActivity {
             playerCardImg.setY(1600);
 
 
-
             comCardImg.setX(100);
             comCardImg.setY(100);
-//        TextView playerCard = findViewById(R.id.playerCard);
-//        TextView comCard = findViewById(R.id.comCard);
+
 
             currentPlayerCard = playerDeck.draw();
             currentComCard = comDeck.draw();
-//        playerCard.setText(currentPlayerCard.toString());
-//        comCard.setText(currentComCard.toString());
-//
+
+
             int playerCardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
             int comCardId = getResources().getIdentifier(currentComCard.toResourceString(), "drawable", getPackageName());
-//        Log.d("CardID", "card id: " + String.valueOf(playerCardId));
+
             playerCardImg.setImageResource(playerCardId);
             comCardImg.setImageResource(comCardId);
 
             playerCardImg.setVisibility(View.VISIBLE);
             comCardImg.setVisibility(View.VISIBLE);
+
+            //Reset text after each draw
+            String str = "Player " + playerDeck.size();
+            player.setText(str);
+            str = "Computer " + comDeck.size();
+            computer.setText(str);
 
 
             playAnimation(playerCardImg, 0);
@@ -111,12 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void battle() {
 
-        String str = "Player " + playerDeck.size();
-        player.setText(str);
-
-
-        str = "Computer " + comDeck.size();
-        computer.setText(str);
+        String str = "";
 
         // Do the battle
         if (currentPlayerCard.compareRank(currentComCard) > 0) {
@@ -125,12 +122,20 @@ public class MainActivity extends AppCompatActivity {
             playAniAfterBattle(playerCardImg, 0);
             playAniAfterBattle(comCardImg, 0);
 
+            playerDeck.add(currentPlayerCard);
+            playerDeck.add(currentComCard);
+
+            //set text after animation ends
+            str = "Player " + playerDeck.size();
+            player.setText(str);
+
+
+            str = "Computer " + comDeck.size();
+            computer.setText(str);
+
             //setting cards to invisible
             //playerCardImg.setVisibility(View.INVISIBLE);
             //comCardImg.setVisibility(View.INVISIBLE);
-
-            playerDeck.add(currentPlayerCard);
-            playerDeck.add(currentComCard);
             Log.d("win", "battle: Player Wins");
         } else if (currentPlayerCard.compareRank(currentComCard) == 0){
             iftied();
@@ -141,23 +146,25 @@ public class MainActivity extends AppCompatActivity {
             playAniAfterBattle(playerCardImg, 1);
             playAniAfterBattle(comCardImg, 1);
 
+            comDeck.add(currentPlayerCard);
+            comDeck.add(currentComCard);
+
+            //set text after animation ends
+            str = "Player " + playerDeck.size();
+            player.setText(str);
+
+
+            str = "Computer " + comDeck.size();
+            computer.setText(str);
+
             //setting cards to invisible
             //playerCardImg.setVisibility(View.INVISIBLE);
             //comCardImg.setVisibility(View.INVISIBLE);
-
-            comDeck.add(currentPlayerCard);
-            comDeck.add(currentComCard);
             Log.d("win", "battle: Player loses");
         }
-        str = "Player " + playerDeck.size();
-        player.setText(str);
-
-
-        str = "Computer " + comDeck.size();
-        computer.setText(str);
 
        playerDeck.shuffle();
-        comDeck.shuffle();
+       comDeck.shuffle();
 
     }
 
@@ -216,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
     void iftied(){
         cards = new LinkedList<>();
         //draw three cards and put them on hold
-        Log.d("Card drawn", "Card Drawnxcjhvx");
         for(int i = 0; i < 3; i++){
             Log.d("Card drawn", "Card Drawn");
             cards.add(playerDeck.draw());
@@ -252,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("win", "battle: Player Wins");
         } else if (cPlayerCard.compareRank(cComCard) == 0){
             //if double tied, we are fucked
+            //cards on hold are kept on hold
             iftied();
             Log.d("win", "battle: Player ties");
         } else {
