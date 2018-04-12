@@ -238,15 +238,17 @@ public class MainActivity extends AppCompatActivity {
         // Do the battle
         if (cPlayerCard.compareRank(cComCard) > 0) {
             // player wins
+            //put cards in cards in hold
             //move cards to player deck
-
-            playerDeck.add(currentPlayerCard);
-            playerDeck.add(currentComCard);
-            playerDeck.add(cPlayerCard);
-            playerDeck.add(cComCard);
+            cards.add(currentPlayerCard);
+            cards.add(currentComCard);
+            cards.add(cPlayerCard);
+            cards.add(cComCard);
             for (Card x: cards) {
                 playerDeck.add(x);
             }
+            //clear cards in hold
+            cards.clear();
             Log.d("win", "battle: Player Wins");
         } else if (cPlayerCard.compareRank(cComCard) == 0){
             //if double tied, we are fucked
@@ -255,13 +257,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // com wins
 
-            comDeck.add(currentPlayerCard);
-            comDeck.add(currentComCard);
-            comDeck.add(cPlayerCard);
-            comDeck.add(cComCard);
+            cards.add(currentPlayerCard);
+            cards.add(currentComCard);
+            cards.add(cPlayerCard);
+            cards.add(cComCard);
             for (Card x: cards) {
                 playerDeck.add(x);
             }
+            cards.clear();
             Log.d("win", "battle: Player loses");
         }
         str = "Player " + playerDeck.size();
