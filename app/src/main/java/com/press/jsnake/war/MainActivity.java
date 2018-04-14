@@ -162,7 +162,12 @@ public class MainActivity extends AppCompatActivity {
             //comCardImg.setVisibility(View.INVISIBLE);
             Log.d("win", "battle: Player loses");
         }
-
+        if (playerDeck.size() == 0){
+            //player loses
+        }
+        if (comDeck.size() == 0){
+            //com loses
+        }
        playerDeck.shuffle();
        comDeck.shuffle();
 
@@ -224,6 +229,14 @@ public class MainActivity extends AppCompatActivity {
         cards = new LinkedList<>();
         //draw three cards and put them on hold
         for(int i = 0; i < 3; i++){
+            if (playerDeck.size() == 0){
+                //player loses
+                break;
+            }
+            if (comDeck.size() == 0){
+                //com loses
+                break;
+            }
             Log.d("Card drawn", "Card Drawn");
             cards.add(playerDeck.draw());
             cards.add(comDeck.draw());
@@ -231,7 +244,15 @@ public class MainActivity extends AppCompatActivity {
         //execute animation
 
         //draw two more cards
+        if (playerDeck.size() == 0){
+            //player loses
+            //take to win/lose screen
+        }
         Card cComCard = playerDeck.draw();
+        if (comDeck.size() == 0){
+            //com loses
+            //take to win/lose screen
+        }
         Card cPlayerCard = comDeck.draw();
         //execute animation
 
@@ -246,12 +267,13 @@ public class MainActivity extends AppCompatActivity {
         // Do the battle
         if (cPlayerCard.compareRank(cComCard) > 0) {
             // player wins
-            //put cards in cards in hold
+            //put cards in cards on hold
             //move cards to player deck
             cards.add(currentPlayerCard);
             cards.add(currentComCard);
             cards.add(cPlayerCard);
             cards.add(cComCard);
+
             for (Card x: cards) {
                 playerDeck.add(x);
             }
@@ -270,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
             cards.add(currentComCard);
             cards.add(cPlayerCard);
             cards.add(cComCard);
+
             for (Card x: cards) {
                 playerDeck.add(x);
             }
