@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView comCardImg;
     boolean isReadyforBattle;
     LinkedList<Card> cards;
+    LinearLayout layout;
 
 
 
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        layout = findViewById(R.id.linearLayout);
 
         // Create deck and fill it
         Deck deck = new Deck();
@@ -138,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             //comCardImg.setVisibility(View.INVISIBLE);
             Log.d("win", "battle: Player Wins");
         } else if (currentPlayerCard.compareRank(currentComCard) == 0){
+            tieAnimation(comCardImg, 1);
+            tieAnimation(playerCardImg, 0);
             iftied();
             Log.d("win", "battle: Player ties");
         } else {
@@ -180,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         switch (who){
             case 0:
                 aniX = ObjectAnimator.ofFloat(img,"x", 600f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 1100f);
+                aniY = ObjectAnimator.ofFloat(img,"y", 1000f);
                 aniX.setDuration(1000); //milli
                 aniY.setDuration(1000); //milli
                 set = new AnimatorSet();
@@ -204,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
         ObjectAnimator aniY;
         AnimatorSet set;
         switch (where){
+            //player
             case 0:
                 aniX = ObjectAnimator.ofFloat(img,"x", 1100f);
                 aniY = ObjectAnimator.ofFloat(img,"y", 1600f);
@@ -213,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 set.playTogether(aniX,aniY);
                 set.start();
                 break;
+            //computer
             case 1:
                 aniX = ObjectAnimator.ofFloat(img,"x", 100f);
                 aniY = ObjectAnimator.ofFloat(img,"y", 100f);
@@ -223,6 +231,44 @@ public class MainActivity extends AppCompatActivity {
                 set.start();
                 break;
         }
+    }
+
+    void tieAnimation(ImageView img, int who){
+        ObjectAnimator aniX;
+        ObjectAnimator aniY;
+        AnimatorSet set;
+        switch (who){
+            //player
+            case 0:
+                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
+                aniY = ObjectAnimator.ofFloat(img,"y", 1000f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+                break;
+            //computer
+            case 1:
+                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
+                aniY = ObjectAnimator.ofFloat(img,"y", 600f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
+                //face down cards
+                ImageView imgC1 = new ImageView(getApplicationContext());
+                ImageView imgC2 = new ImageView(getApplicationContext());
+                ImageView imgC3 = new ImageView(getApplicationContext());
+
+                imgC1.setImageResource(R.drawable.yellow_back);
+                imgC2.setImageResource(R.drawable.yellow_back);
+                imgC3.setImageResource(R.drawable.yellow_back);
+                break;
+        }
+
     }
 
     void iftied(){
