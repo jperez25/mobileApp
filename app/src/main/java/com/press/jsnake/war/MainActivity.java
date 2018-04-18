@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        layout = findViewById(R.id.linearLayout);
+        layout = findViewById(R.id.fragment);
 
         // Create deck and fill it
         Deck deck = new Deck();
@@ -77,11 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void play(View view) {
 
-        layout = xx;
         if (isReadyforBattle){
             battle();
             isReadyforBattle = false;
-            Animations.generateImages(layout, getApplicationContext());
         }
         else{
             //set imageviews to their respective places
@@ -185,7 +183,10 @@ public class MainActivity extends AppCompatActivity {
     void iftied(){
         Animations.tieAnimation(comCardImg, 1);
         Animations.tieAnimation(playerCardImg, 0);
-        Animations.generateImages(layout, getApplicationContext());
+        //player
+        Animations.generateImages(layout, getApplicationContext(),0);
+        //Computer
+        Animations.generateImages(layout, getApplicationContext(),1);
         cards = new LinkedList<>();
         //draw three cards and put them on hold
         for(int i = 0; i < 3; i++){
@@ -219,6 +220,37 @@ public class MainActivity extends AppCompatActivity {
         }
         Card cPlayerCard = comDeck.draw();
         //execute animation
+
+        ImageView pnewCard = new ImageView(getApplicationContext());
+        ImageView cnewCard = new ImageView(getApplicationContext());
+
+        int playerCardId = getResources().getIdentifier(cPlayerCard.toResourceString(), "drawable", getPackageName());
+        int comCardId = getResources().getIdentifier(cComCard.toResourceString(), "drawable", getPackageName());
+
+        pnewCard.setImageResource(playerCardId);
+        cnewCard.setImageResource(comCardId);
+
+        pnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
+        pnewCard.setMaxHeight(80);
+        pnewCard.setMaxWidth(53);
+        pnewCard.setImageResource(R.drawable.yellow_back);
+        pnewCard.setX(1200);
+        pnewCard.setY(1600);
+
+        cnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
+        cnewCard.setMaxHeight(80);
+        cnewCard.setMaxWidth(53);
+        cnewCard.setImageResource(R.drawable.yellow_back);
+        cnewCard.setX(100);
+        cnewCard.setY(100);
+
+        layout.addView(pnewCard);
+        layout.addView(cnewCard);
+
+        //player
+        Animations.playAnimation(pnewCard, 0);
+        //com
+        Animations.playAnimation(cnewCard, 1);
 
         //set text
         String str = "Player " + playerDeck.size();
