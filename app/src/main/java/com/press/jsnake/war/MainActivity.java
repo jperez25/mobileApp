@@ -2,9 +2,12 @@ package com.press.jsnake.war;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -29,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView comCardImg;
     boolean isReadyforBattle;
     LinkedList<Card> cards;
-    LinearLayout layout;
+    ConstraintLayout layout;
 
 
 
@@ -74,10 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void play(View view) {
 
-
+        layout = xx;
         if (isReadyforBattle){
             battle();
             isReadyforBattle = false;
+            Animations.generateImages(layout, getApplicationContext());
         }
         else{
             //set imageviews to their respective places
@@ -108,9 +112,8 @@ public class MainActivity extends AppCompatActivity {
             str = "Computer " + comDeck.size();
             computer.setText(str);
 
-
-            playAnimation(playerCardImg, 0);
-            playAnimation(comCardImg, 1);
+            Animations.playAnimation(playerCardImg, 0);
+            Animations.playAnimation(comCardImg, 1);
             isReadyforBattle = true;
         }
     }
@@ -123,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         if (currentPlayerCard.compareRank(currentComCard) > 0) {
             // player wins
             //move cards to player deck
-            playAniAfterBattle(playerCardImg, 0);
-            playAniAfterBattle(comCardImg, 0);
+            Animations.playAniAfterBattle(playerCardImg, 0);
+            Animations.playAniAfterBattle(comCardImg, 0);
 
             playerDeck.add(currentPlayerCard);
             playerDeck.add(currentComCard);
@@ -142,15 +145,13 @@ public class MainActivity extends AppCompatActivity {
             //comCardImg.setVisibility(View.INVISIBLE);
             Log.d("win", "battle: Player Wins");
         } else if (currentPlayerCard.compareRank(currentComCard) == 0){
-            tieAnimation(comCardImg, 1);
-            tieAnimation(playerCardImg, 0);
             iftied();
             Log.d("win", "battle: Player ties");
         } else {
             // com wins
             //move cards to player deck
-            playAniAfterBattle(playerCardImg, 1);
-            playAniAfterBattle(comCardImg, 1);
+            Animations.playAniAfterBattle(playerCardImg, 1);
+            Animations.playAniAfterBattle(comCardImg, 1);
 
             comDeck.add(currentPlayerCard);
             comDeck.add(currentComCard);
@@ -170,117 +171,32 @@ public class MainActivity extends AppCompatActivity {
         }
         if (playerDeck.size() == 0){
             //player loses
+            setContentView(R.layout.lose);
         }
         if (comDeck.size() == 0){
             //com loses
+            setContentView(R.layout.winner);
         }
        playerDeck.shuffle();
        comDeck.shuffle();
 
     }
 
-    void playAnimation(ImageView img, int who){
-        ObjectAnimator aniX;
-        ObjectAnimator aniY;
-        AnimatorSet set;
-        switch (who){
-            case 0:
-                aniX = ObjectAnimator.ofFloat(img,"x", 600f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 1000f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-                break;
-            case 1:
-                aniX = ObjectAnimator.ofFloat(img,"x", 600f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 600f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-                break;
-        }
-    }
-
-    void playAniAfterBattle(ImageView img, int where){
-        ObjectAnimator aniX;
-        ObjectAnimator aniY;
-        AnimatorSet set;
-        switch (where){
-            //player
-            case 0:
-                aniX = ObjectAnimator.ofFloat(img,"x", 1100f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 1600f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-                break;
-            //computer
-            case 1:
-                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 100f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-                break;
-        }
-    }
-
-    void tieAnimation(ImageView img, int who){
-        ObjectAnimator aniX;
-        ObjectAnimator aniY;
-        AnimatorSet set;
-        switch (who){
-            //player
-            case 0:
-                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 1000f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-                break;
-            //computer
-            case 1:
-                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 600f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-
-                //face down cards
-                ImageView imgC1 = new ImageView(getApplicationContext());
-                ImageView imgC2 = new ImageView(getApplicationContext());
-                ImageView imgC3 = new ImageView(getApplicationContext());
-
-                imgC1.setImageResource(R.drawable.yellow_back);
-                imgC2.setImageResource(R.drawable.yellow_back);
-                imgC3.setImageResource(R.drawable.yellow_back);
-                break;
-        }
-
-    }
-
     void iftied(){
+        Animations.tieAnimation(comCardImg, 1);
+        Animations.tieAnimation(playerCardImg, 0);
+        Animations.generateImages(layout, getApplicationContext());
         cards = new LinkedList<>();
         //draw three cards and put them on hold
         for(int i = 0; i < 3; i++){
             if (playerDeck.size() == 0){
                 //player loses
+                setContentView(R.layout.lose);
                 break;
             }
             if (comDeck.size() == 0){
                 //com loses
+                setContentView(R.layout.winner);
                 break;
             }
             Log.d("Card drawn", "Card Drawn");
@@ -293,11 +209,13 @@ public class MainActivity extends AppCompatActivity {
         if (playerDeck.size() == 0){
             //player loses
             //take to win/lose screen
+            setContentView(R.layout.lose);
         }
         Card cComCard = playerDeck.draw();
         if (comDeck.size() == 0){
             //com loses
             //take to win/lose screen
+            setContentView(R.layout.winner);
         }
         Card cPlayerCard = comDeck.draw();
         //execute animation
