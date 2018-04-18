@@ -119,7 +119,7 @@ public class Animations {
                     playerFaceDownCards[i].setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
                     playerFaceDownCards[i].setMaxHeight(80);
                     playerFaceDownCards[i].setMaxWidth(53);
-                    playerFaceDownCards[i].setImageResource(R.drawable.yellow_back);
+                    playerFaceDownCards[i].setImageResource(R.drawable.back_card);
                     playerFaceDownCards[i].setX(1200);
                     playerFaceDownCards[i].setY(1600);
 
@@ -131,7 +131,7 @@ public class Animations {
                 i = 0;
                 for (ImageView img: playerFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 100f);
+                    aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 100f + i*50 );
                     aniY = ObjectAnimator.ofFloat(playerFaceDownCards[i],"y", 1600f);
                     aniX.setDuration(1000); //milli
                     aniY.setDuration(1000); //milli
@@ -148,7 +148,7 @@ public class Animations {
                     comFaceDownCards[i].setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
                     comFaceDownCards[i].setMaxHeight(80);
                     comFaceDownCards[i].setMaxWidth(53);
-                    comFaceDownCards[i].setImageResource(R.drawable.yellow_back);
+                    comFaceDownCards[i].setImageResource(R.drawable.back_card);
                     comFaceDownCards[i].setX(100);
                     comFaceDownCards[i].setY(100);
 
@@ -159,7 +159,7 @@ public class Animations {
                 i = 0;
                 for (ImageView img: playerFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 1200f);
+                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 1200f - i*50);
                     aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", 100);
                     aniX.setDuration(1000); //milli
                     aniY.setDuration(1000); //milli
