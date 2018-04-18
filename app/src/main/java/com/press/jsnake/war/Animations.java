@@ -138,6 +138,7 @@ public class Animations {
                     set = new AnimatorSet();
                     set.playTogether(aniX,aniY);
                     set.start();
+                    i++;
                 }
                 break;
             case 1:
