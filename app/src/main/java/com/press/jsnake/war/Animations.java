@@ -133,8 +133,8 @@ public class Animations {
                     //initialize animation
                     aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 100f + i*50 );
                     aniY = ObjectAnimator.ofFloat(playerFaceDownCards[i],"y", 1600f);
-                    aniX.setDuration(1000); //milli
-                    aniY.setDuration(1000); //milli
+                    aniX.setDuration(1000+i*50); //milli
+                    aniY.setDuration(1000+i*50); //milli
                     set = new AnimatorSet();
                     set.playTogether(aniX,aniY);
                     set.start();
@@ -162,8 +162,8 @@ public class Animations {
                     //initialize animation
                     aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 1200f - i*50);
                     aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", 100);
-                    aniX.setDuration(1000); //milli
-                    aniY.setDuration(1000); //milli
+                    aniX.setDuration(1000+i*50); //milli
+                    aniY.setDuration(1000+i*50); //milli
                     set = new AnimatorSet();
                     set.playTogether(aniX,aniY);
                     set.start();

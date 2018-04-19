@@ -3,6 +3,8 @@ package com.press.jsnake.war;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     boolean isReadyforBattle;
     LinkedList<Card> cards;
     ConstraintLayout layout;
+    String str;
+    int sampleSize = 4;
 
 
 
@@ -62,17 +66,16 @@ public class MainActivity extends AppCompatActivity {
         player = findViewById(R.id.playerText);
         computer = findViewById(R.id.computerText);
 
-        String str = player.getText().toString();
-        str += " " + playerDeck.size();
+        str = " Player " + playerDeck.size();
         player.setText(str);
 
-        str = computer.getText().toString();
-        str += " " + comDeck.size();
+        str = "Player " + comDeck.size();
         computer.setText(str);
 
-        isReadyforBattle = false;
         playerCardImg = findViewById(R.id.playerCardImg);
         comCardImg = findViewById(R.id.comCardImg);
+
+        isReadyforBattle = false;
     }
 
     public void play(View view) {
@@ -98,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
             int playerCardId = getResources().getIdentifier(currentPlayerCard.toResourceString(), "drawable", getPackageName());
             int comCardId = getResources().getIdentifier(currentComCard.toResourceString(), "drawable", getPackageName());
 
+            Bitmap originalImage = BitmapFactory.decodeResource(getResources(), playerCardId);
+
+
             playerCardImg.setImageResource(playerCardId);
             comCardImg.setImageResource(comCardId);
 
@@ -105,20 +111,20 @@ public class MainActivity extends AppCompatActivity {
             comCardImg.setVisibility(View.VISIBLE);
 
             //Reset text after each draw
-            String str = "Player " + playerDeck.size();
+            str = "Player " + playerDeck.size();
             player.setText(str);
             str = "Computer " + comDeck.size();
             computer.setText(str);
 
             Animations.playAnimation(playerCardImg, 0);
             Animations.playAnimation(comCardImg, 1);
+
+
             isReadyforBattle = true;
         }
     }
 
     public void battle() {
-
-        String str = "";
 
         // Do the battle
         if (currentPlayerCard.compareRank(currentComCard) > 0) {
@@ -175,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
             //com loses
             setContentView(R.layout.winner);
         }
-       playerDeck.shuffle();
-       comDeck.shuffle();
+        playerDeck.shuffle();
+        comDeck.shuffle();
 
     }
 
@@ -219,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.winner);
         }
         Card cPlayerCard = comDeck.draw();
-        //execute animation
 
+        //Generate Images Dynamically
         ImageView pnewCard = new ImageView(getApplicationContext());
         ImageView cnewCard = new ImageView(getApplicationContext());
 
@@ -233,27 +239,28 @@ public class MainActivity extends AppCompatActivity {
         pnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
         pnewCard.setMaxHeight(80);
         pnewCard.setMaxWidth(53);
-        pnewCard.setImageResource(R.drawable.yellow_back);
+        pnewCard.setImageResource(playerCardId);
         pnewCard.setX(1200);
         pnewCard.setY(1600);
 
         cnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
         cnewCard.setMaxHeight(80);
         cnewCard.setMaxWidth(53);
-        cnewCard.setImageResource(R.drawable.yellow_back);
+        cnewCard.setImageResource(comCardId);
         cnewCard.setX(100);
         cnewCard.setY(100);
 
         layout.addView(pnewCard);
         layout.addView(cnewCard);
 
+        //execute animation
         //player
         Animations.playAnimation(pnewCard, 0);
         //com
         Animations.playAnimation(cnewCard, 1);
 
         //set text
-        String str = "Player " + playerDeck.size();
+        str = "Player " + playerDeck.size();
         player.setText(str);
 
         str = "Computer " + comDeck.size();
