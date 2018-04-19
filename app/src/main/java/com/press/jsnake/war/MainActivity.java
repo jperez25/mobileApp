@@ -285,6 +285,8 @@ public class MainActivity extends AppCompatActivity {
             //clear cards in hold
             cards.clear();
 
+            Animations.moveCards(playerCardImg, pnewCard, 0);
+            Animations.moveCards(comCardImg, cnewCard, 0);
             Log.d("win", "battle: Player Wins");
         } else if (cPlayerCard.compareRank(cComCard) == 0){
             //if double tied, we are fucked
@@ -303,6 +305,8 @@ public class MainActivity extends AppCompatActivity {
                 playerDeck.add(x);
             }
             cards.clear();
+            Animations.moveCards(playerCardImg, pnewCard, 1);
+            Animations.moveCards(comCardImg, cnewCard, 1);
             Log.d("win", "battle: Player loses");
         }
         str = "Player " + playerDeck.size();

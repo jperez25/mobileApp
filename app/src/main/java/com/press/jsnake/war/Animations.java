@@ -173,11 +173,94 @@ public class Animations {
                 break;
         }
     }
+
     public void removeImages(ImageView pnewCard, ImageView cnewCard)  {
         cnewCard.setVisibility(View.INVISIBLE);
         pnewCard.setVisibility(View.INVISIBLE);
     }
 
+    static void moveCards(ImageView oldImg, ImageView newImg, int winner){
+
+        ObjectAnimator aniX;
+        ObjectAnimator aniY;
+        AnimatorSet set;
+        switch (winner){
+            //player
+            case 0:
+                aniX = ObjectAnimator.ofFloat(newImg,"x", 1100f);
+                aniY = ObjectAnimator.ofFloat(newImg,"y", 1600f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
+                int i = 0;
+                for (ImageView img: playerFaceDownCards) {
+                    //initialize animation
+                    aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 1100f);
+                    aniY = ObjectAnimator.ofFloat(playerFaceDownCards[i],"y", 1600f);
+                    aniX.setDuration(1000+i*50); //milli
+                    aniY.setDuration(1000+i*50); //milli
+                    set = new AnimatorSet();
+                    set.playTogether(aniX,aniY);
+                    set.start();
+                    i++;
+                }
+                i = 0;
+                for (ImageView img: comFaceDownCards) {
+                    //initialize animation
+                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 1100f );
+                    aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", 1600f);
+                    aniX.setDuration(1000+i*50); //milli
+                    aniY.setDuration(1000+i*50); //milli
+                    set = new AnimatorSet();
+                    set.playTogether(aniX,aniY);
+                    set.start();
+                    i++;
+                }
+
+                break;
+            //com
+            case 1:
+                aniX = ObjectAnimator.ofFloat(newImg,"x", 100f);
+                aniY = ObjectAnimator.ofFloat(newImg,"y", 100f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
+                i = 0;
+                for (ImageView img: playerFaceDownCards) {
+                    //initialize animation
+                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 100f);
+                    aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", 100f);
+                    aniX.setDuration(1000+i*50); //milli
+                    aniY.setDuration(1000+i*50); //milli
+                    set = new AnimatorSet();
+                    set.playTogether(aniX,aniY);
+                    set.start();
+                    i++;
+                }
+
+                i= 0;
+                for (ImageView img: playerFaceDownCards) {
+                    //initialize animation
+                    aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 100f );
+                    aniY = ObjectAnimator.ofFloat(playerFaceDownCards[i],"y", 100f);
+                    aniX.setDuration(1000+i*50); //milli
+                    aniY.setDuration(1000+i*50); //milli
+                    set = new AnimatorSet();
+                    set.playTogether(aniX,aniY);
+                    set.start();
+                    i++;
+                }
+
+                break;
+        }
+
+    }
 
 
 }
