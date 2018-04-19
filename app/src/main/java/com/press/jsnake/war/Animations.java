@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.view.View;
 import android.widget.ImageView;
 
 public class Animations {
@@ -171,6 +172,10 @@ public class Animations {
                 }
                 break;
         }
+    }
+    public void removeImages(ImageView pnewCard, ImageView cnewCard)  {
+        cnewCard.setVisibility(View.INVISIBLE);
+        pnewCard.setVisibility(View.INVISIBLE);
     }
 
 

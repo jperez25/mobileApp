@@ -208,7 +208,9 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.d("Card drawn", "Card Drawn");
             cards.add(playerDeck.draw());
+            Log.d("tie", cards.getLast().toString());
             cards.add(comDeck.draw());
+            Log.d("tie", cards.getLast().toString());
         }
         //execute animation
 
@@ -282,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
             }
             //clear cards in hold
             cards.clear();
+
             Log.d("win", "battle: Player Wins");
         } else if (cPlayerCard.compareRank(cComCard) == 0){
             //if double tied, we are fucked
