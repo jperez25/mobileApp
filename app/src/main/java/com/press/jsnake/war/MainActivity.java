@@ -173,11 +173,11 @@ public class MainActivity extends AppCompatActivity {
             //comCardImg.setVisibility(View.INVISIBLE);
             Log.d("win", "battle: Player loses");
         }
-        if (playerDeck.size() == 0){
+        if (playerDeck.isEmpty()){
             //player loses
             setContentView(R.layout.lose);
         }
-        if (comDeck.size() == 0){
+        if (comDeck.isEmpty()){
             //com loses
             setContentView(R.layout.winner);
         }
@@ -196,12 +196,12 @@ public class MainActivity extends AppCompatActivity {
         cards = new LinkedList<>();
         //draw three cards and put them on hold
         for(int i = 0; i < 3; i++){
-            if (playerDeck.size() == 0){
+            if (playerDeck.isEmpty()){
                 //player loses
                 setContentView(R.layout.lose);
                 break;
             }
-            if (comDeck.size() == 0){
+            if (comDeck.isEmpty()){
                 //com loses
                 setContentView(R.layout.winner);
                 break;
@@ -215,16 +215,19 @@ public class MainActivity extends AppCompatActivity {
         //execute animation
 
         //draw two more cards
-        if (playerDeck.size() == 0){
+        if (playerDeck.isEmpty()){
             //player loses
             //take to win/lose screen
             setContentView(R.layout.lose);
+            return;
         }
         Card cComCard = playerDeck.draw();
-        if (comDeck.size() == 0){
+        if (comDeck.isEmpty()){
             //com loses
             //take to win/lose screen
+            Log.d("Empty Deck", "Coms deck is empty!! Switching layouts... ");
             setContentView(R.layout.winner);
+            return;
         }
         Card cPlayerCard = comDeck.draw();
 
