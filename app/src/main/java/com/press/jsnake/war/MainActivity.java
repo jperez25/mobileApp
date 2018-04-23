@@ -30,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
     TextView computer;
     Card currentPlayerCard;
     Card currentComCard;
-    ImageView playerCardImg;
-    ImageView comCardImg;
+    public ImageView playerCardImg;
+    public ImageView comCardImg;
     boolean isReadyforBattle;
     LinkedList<Card> cards;
     ConstraintLayout layout;
     String str;
     int sampleSize = 4;
+    AsyncAnimations anime;
 
 
 
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        anime = new AsyncAnimations();
 
         layout = findViewById(R.id.fragment);
 
@@ -116,8 +119,11 @@ public class MainActivity extends AppCompatActivity {
             str = "Computer " + comDeck.size();
             computer.setText(str);
 
-            Animations.playAnimation(playerCardImg, 0);
-            Animations.playAnimation(comCardImg, 1);
+            //Animations.playAnimation(playerCardImg, 0);
+            //Animations.playAnimation(comCardImg, 1);
+
+            anime.playAnimation(playerCardImg,0);
+            anime.playAnimation(comCardImg,1);
 
 
             isReadyforBattle = true;
@@ -130,8 +136,11 @@ public class MainActivity extends AppCompatActivity {
         if (currentPlayerCard.compareRank(currentComCard) > 0) {
             // player wins
             //move cards to player deck
-            Animations.playAniAfterBattle(playerCardImg, 0);
-            Animations.playAniAfterBattle(comCardImg, 0);
+            //Animations.playAniAfterBattle(playerCardImg, 0);
+            //Animations.playAniAfterBattle(comCardImg, 0);
+
+            anime.playAniAfterBattle(playerCardImg, 0);
+            anime.playAniAfterBattle(comCardImg, 0);
 
             playerDeck.add(currentPlayerCard);
             playerDeck.add(currentComCard);
@@ -156,6 +165,9 @@ public class MainActivity extends AppCompatActivity {
             //move cards to player deck
             Animations.playAniAfterBattle(playerCardImg, 1);
             Animations.playAniAfterBattle(comCardImg, 1);
+
+            anime.playAniAfterBattle(playerCardImg, 1);
+            anime.playAniAfterBattle(comCardImg, 1);
 
             comDeck.add(currentPlayerCard);
             comDeck.add(currentComCard);
@@ -187,12 +199,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void iftied(){
-        Animations.tieAnimation(comCardImg, 1);
-        Animations.tieAnimation(playerCardImg, 0);
+        //Animations.tieAnimation(comCardImg, 1);
+        //Animations.tieAnimation(playerCardImg, 0);
+
+        anime.tieAnimation(comCardImg,1);
+        anime.tieAnimation(playerCardImg,0);
+
         //player
-        Animations.generateImages(layout, getApplicationContext(),0);
+        //Animations.generateImages(layout, getApplicationContext(),0);
+        anime.generateImages(layout, getApplicationContext(),0);
         //Computer
-        Animations.generateImages(layout, getApplicationContext(),1);
+        //Animations.generateImages(layout, getApplicationContext(),1);
+        anime.generateImages(layout, getApplicationContext(),1);
         cards = new LinkedList<>();
         //draw three cards and put them on hold
         for(int i = 0; i < 3; i++){
@@ -263,9 +281,11 @@ public class MainActivity extends AppCompatActivity {
 
         //execute animation
         //player
-        Animations.playAnimation(pnewCard, 0);
+        //Animations.playAnimation(pnewCard, 0);
+        anime.playAnimation(pnewCard,0);
         //com
-        Animations.playAnimation(cnewCard, 1);
+        //Animations.playAnimation(cnewCard, 1);
+        anime.playAnimation(cnewCard,1);
 
         //set text
         str = "Player " + playerDeck.size();
@@ -273,6 +293,8 @@ public class MainActivity extends AppCompatActivity {
 
         str = "Computer " + comDeck.size();
         computer.setText(str);
+
+
 
         //battle
         // Do the battle
@@ -291,8 +313,12 @@ public class MainActivity extends AppCompatActivity {
             //clear cards in hold
             cards.clear();
 
-            Animations.moveCards(playerCardImg, pnewCard, 0);
-            Animations.moveCards(comCardImg, cnewCard, 0);
+            //Animations.moveCards(playerCardImg, pnewCard, 0);
+            //Animations.moveCards(comCardImg, cnewCard, 0);
+
+            anime.moveCards(playerCardImg, pnewCard, 0);
+            anime.moveCards(comCardImg, cnewCard, 0);
+
             Log.d("win", "battle: Player Wins");
         } else if (cPlayerCard.compareRank(cComCard) == 0){
             //if double tied, we are fucked
@@ -311,8 +337,13 @@ public class MainActivity extends AppCompatActivity {
                 playerDeck.add(x);
             }
             cards.clear();
-            Animations.moveCards(playerCardImg, pnewCard, 1);
-            Animations.moveCards(comCardImg, cnewCard, 1);
+
+            //Animations.moveCards(playerCardImg, pnewCard, 1);
+            //Animations.moveCards(comCardImg, cnewCard, 1);
+
+            anime.moveCards(playerCardImg, pnewCard, 1);
+            anime.moveCards(comCardImg, cnewCard, 1);
+
             Log.d("win", "battle: Player loses");
         }
         str = "Player " + playerDeck.size();

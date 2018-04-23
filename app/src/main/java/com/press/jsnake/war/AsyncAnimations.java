@@ -3,11 +3,14 @@ package com.press.jsnake.war;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Animations {
+
+public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
+
     static private ConstraintLayout layout;
     static private ImageView playerFaceDownCards[];
     static private ImageView comFaceDownCards[];
@@ -20,9 +23,30 @@ public class Animations {
     static float comX = 50;
     static float comY = 80;
 
-    private  Animations(){};
+    @Override
+    protected Void doInBackground(Integer... integer) {
+        switch (integer[0]){
+            case 1:
+                //there is no way to call this method and pass
+                //playAnimation();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
 
-    static void playAnimation(ImageView img, int who){
+
+        return null;
+    }
+
+
+
+    public void playAnimation(ImageView img, int who){
         ObjectAnimator aniX;
         ObjectAnimator aniY;
         AnimatorSet set;
@@ -50,7 +74,7 @@ public class Animations {
         }
     }
 
-    static void playAniAfterBattle(ImageView img, int where){
+    public void playAniAfterBattle(ImageView img, int where){
         ObjectAnimator aniX;
         ObjectAnimator aniY;
         AnimatorSet set;
@@ -78,7 +102,7 @@ public class Animations {
         }
     }
 
-    static void tieAnimation(ImageView img, int who){
+    public void tieAnimation(ImageView img, int who){
         ObjectAnimator aniX;
         ObjectAnimator aniY;
         AnimatorSet set;
@@ -110,7 +134,7 @@ public class Animations {
 
     }
 
-    static  void generateImages(ConstraintLayout lay, Context cx, int who){
+    public   void generateImages(ConstraintLayout lay, Context cx, int who){
         layout = lay;
         playerFaceDownCards = new ImageView[3];
         comFaceDownCards = new ImageView[3];
@@ -187,7 +211,7 @@ public class Animations {
         pnewCard.setVisibility(View.INVISIBLE);
     }
 
-    static void moveCards(ImageView oldImg, ImageView newImg, int winner){
+    public void moveCards(ImageView oldImg, ImageView newImg, int winner){
 
         ObjectAnimator aniX;
         ObjectAnimator aniY;
@@ -286,6 +310,4 @@ public class Animations {
         }
 
     }
-
-
 }
