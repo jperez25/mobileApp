@@ -16,7 +16,7 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
     static private ImageView comFaceDownCards[];
 
     //Player deck Coordinates
-    static float x = 1050;
+    static float x = 950;
     static float y = 1550;
 
     //Com deck Coordinates
