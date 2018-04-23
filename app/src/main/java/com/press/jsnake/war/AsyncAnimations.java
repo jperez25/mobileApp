@@ -12,8 +12,8 @@ import android.widget.ImageView;
 public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
 
     static private ConstraintLayout layout;
-    static private ImageView playerFaceDownCards[];
-    static private ImageView comFaceDownCards[];
+    public ImageView playerFaceDownCards[];
+    public ImageView comFaceDownCards[];
 
     //Player deck Coordinates
     static float x = 950;
@@ -25,22 +25,6 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
 
     @Override
     protected Void doInBackground(Integer... integer) {
-        switch (integer[0]){
-            case 1:
-                //there is no way to call this method and pass
-                //playAnimation();
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-        }
-
-
         return null;
     }
 
@@ -134,7 +118,7 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
 
     }
 
-    public   void generateImages(ConstraintLayout lay, Context cx, int who){
+    public void generateImages(ConstraintLayout lay, Context cx, int who){
         layout = lay;
         playerFaceDownCards = new ImageView[3];
         comFaceDownCards = new ImageView[3];

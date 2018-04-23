@@ -124,8 +124,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             //tie Battle
             case 4:
+                //If true there is a double tie
                 if(tieBattle()){
-                    //goes to tie;
+                    //destroy cards before battle
+                    destroyExtraCards();
+                    //goes to tie
                     phases = 3;
                 }
                 else{
@@ -146,6 +149,16 @@ public class MainActivity extends AppCompatActivity {
         comCardImg.setX(100);
         comCardImg.setY(100);
 
+        if (playerDeck.isEmpty()){
+            //player loses
+            setContentView(R.layout.lose);
+            return;
+        }
+        if (comDeck.isEmpty()){
+            //com loses
+            setContentView(R.layout.winner);
+            return;
+        }
 
         currentPlayerCard = playerDeck.draw();
         currentComCard = comDeck.draw();
@@ -252,6 +265,16 @@ public class MainActivity extends AppCompatActivity {
             }
             if (pnewCard.getVisibility() == View.VISIBLE){
                 pnewCard.setVisibility(View.INVISIBLE);
+            }
+            if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
+                for (ImageView img: anime.playerFaceDownCards) {
+                    img.setVisibility(View.INVISIBLE);
+                }
+            }
+            if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
+                for (ImageView img: anime.comFaceDownCards) {
+                    img.setVisibility(View.INVISIBLE);
+                }
             }
         }
         catch (NullPointerException e){
@@ -419,160 +442,28 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    void iftied(){
-        //Animations.tieAnimation(comCardImg, 1);
-        //Animations.tieAnimation(playerCardImg, 0);
-
-        anime.tieAnimation(comCardImg,1);
-        anime.tieAnimation(playerCardImg,0);
-
-        //player
-        //Animations.generateImages(layout, getApplicationContext(),0);
-        anime.generateImages(layout, getApplicationContext(),0);
-        //Computer
-        //Animations.generateImages(layout, getApplicationContext(),1);
-        anime.generateImages(layout, getApplicationContext(),1);
-        cards = new LinkedList<>();
-        //draw three cards and put them on hold
-        for(int i = 0; i < 3; i++){
-            if (playerDeck.isEmpty()){
-                //player loses
-                setContentView(R.layout.lose);
-                break;
+    private void destroyExtraCards(){
+        try{
+            if (cnewCard.getVisibility() == View.VISIBLE){
+                cnewCard.setVisibility(View.INVISIBLE);
             }
-            if (comDeck.isEmpty()){
-                //com loses
-                setContentView(R.layout.winner);
-                break;
+            if (pnewCard.getVisibility() == View.VISIBLE){
+                pnewCard.setVisibility(View.INVISIBLE);
             }
-            Log.d("Card drawn", "Card Drawn");
-            cards.add(playerDeck.draw());
-            Log.d("tie", cards.getLast().toString());
-            cards.add(comDeck.draw());
-            Log.d("tie", cards.getLast().toString());
-        }
-        //execute animation
-
-        //draw two more cards
-        if (playerDeck.isEmpty()){
-            //player loses
-            //take to win/lose screen
-            setContentView(R.layout.lose);
-            return;
-        }
-        Card cComCard = playerDeck.draw();
-        if (comDeck.isEmpty()){
-            //com loses
-            //take to win/lose screen
-            Log.d("Empty Deck", "Coms deck is empty!! Switching layouts... ");
-            setContentView(R.layout.winner);
-            return;
-        }
-        Card cPlayerCard = comDeck.draw();
-
-        //Generate Images Dynamically
-        ImageView pnewCard = new ImageView(getApplicationContext());
-        ImageView cnewCard = new ImageView(getApplicationContext());
-
-        int playerCardId = getResources().getIdentifier(cPlayerCard.toResourceString(), "drawable", getPackageName());
-        int comCardId = getResources().getIdentifier(cComCard.toResourceString(), "drawable", getPackageName());
-
-        pnewCard.setImageResource(playerCardId);
-        cnewCard.setImageResource(comCardId);
-
-        pnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(300,250));
-        pnewCard.setMinimumHeight(120);
-        pnewCard.setMinimumWidth(80);
-//        pnewCard.setMaxHeight(80);
-//        pnewCard.setMaxWidth(53);
-        pnewCard.setImageResource(playerCardId);
-        pnewCard.setX(1200);
-        pnewCard.setY(1600);
-
-        cnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(300,250));
-//        cnewCard.setMaxHeight(80);
-//        cnewCard.setMaxWidth(53);
-        pnewCard.setMinimumHeight(120);
-        pnewCard.setMinimumWidth(80);
-        cnewCard.setX(100);
-        cnewCard.setY(100);
-
-        layout.addView(pnewCard);
-        layout.addView(cnewCard);
-
-        //execute animation
-        //player
-        //Animations.playAnimation(pnewCard, 0);
-        anime.playAnimation(pnewCard,0);
-        //com
-        //Animations.playAnimation(cnewCard, 1);
-        anime.playAnimation(cnewCard,1);
-
-        //set text
-        str = "Player " + playerDeck.size();
-        player.setText(str);
-
-        str = "Computer " + comDeck.size();
-        computer.setText(str);
-
-
-
-        //battle
-        // Do the battle
-        if (cPlayerCard.compareRank(cComCard) > 0) {
-            // player wins
-            //put cards in cards on hold
-            //move cards to player deck
-            cards.add(currentPlayerCard);
-            cards.add(currentComCard);
-            cards.add(cPlayerCard);
-            cards.add(cComCard);
-
-            for (Card x: cards) {
-                playerDeck.add(x);
+            if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
+                for (ImageView img: anime.playerFaceDownCards) {
+                    img.setVisibility(View.INVISIBLE);
+                }
             }
-            //clear cards in hold
-            cards.clear();
-
-            //Animations.moveCards(playerCardImg, pnewCard, 0);
-            //Animations.moveCards(comCardImg, cnewCard, 0);
-
-            anime.moveCards(playerCardImg, pnewCard, 0);
-            anime.moveCards(comCardImg, cnewCard, 0);
-
-            Log.d("win", "battle: Player Wins");
-        } else if (cPlayerCard.compareRank(cComCard) == 0){
-            //if double tied, we are fucked
-            //cards on hold are kept on hold
-            iftied();
-            Log.d("win", "battle: Player ties");
-        } else {
-            // com wins
-
-            cards.add(currentPlayerCard);
-            cards.add(currentComCard);
-            cards.add(cPlayerCard);
-            cards.add(cComCard);
-
-            for (Card x: cards) {
-                playerDeck.add(x);
+            if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
+                for (ImageView img: anime.comFaceDownCards) {
+                    img.setVisibility(View.INVISIBLE);
+                }
             }
-            cards.clear();
-
-            //Animations.moveCards(playerCardImg, pnewCard, 1);
-            //Animations.moveCards(comCardImg, cnewCard, 1);
-
-            anime.moveCards(playerCardImg, pnewCard, 1);
-            anime.moveCards(comCardImg, cnewCard, 1);
-
-            Log.d("win", "battle: Player loses");
         }
-        str = "Player " + playerDeck.size();
-        player.setText(str);
-
-        str = "Computer " + comDeck.size();
-        computer.setText(str);
+        catch (NullPointerException e){
+            Log.d("NULL", "destroy didnt work");
+        }
     }
-
 
 }
