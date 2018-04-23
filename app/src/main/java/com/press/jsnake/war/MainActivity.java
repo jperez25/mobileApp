@@ -3,6 +3,7 @@ package com.press.jsnake.war;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.constraint.ConstraintLayout;
@@ -244,11 +245,14 @@ public class MainActivity extends AppCompatActivity {
         }
         if (playerDeck.isEmpty()){
             //player loses
-            setContentView(R.layout.lose);
+            Intent myIntent = new Intent(MainActivity.this, lose.class);
+            startActivity(myIntent);
         }
         if (comDeck.isEmpty()){
             //com loses
-            setContentView(R.layout.winner);
+
+            Intent myIntent = new Intent(MainActivity.this, Win.class);
+            startActivity(myIntent);
         }
         playerDeck.shuffle();
         comDeck.shuffle();
@@ -297,12 +301,14 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 3; i++){
             if (playerDeck.isEmpty()){
                 //player loses
-                setContentView(R.layout.lose);
+                Intent myIntent = new Intent(MainActivity.this, lose.class);
+                startActivity(myIntent);
                 break;
             }
             if (comDeck.isEmpty()){
                 //com loses
-                setContentView(R.layout.winner);
+                Intent myIntent = new Intent(MainActivity.this, Win.class);
+                startActivity(myIntent);
                 break;
             }
             Log.d("Card drawn", "Card Drawn");
@@ -318,6 +324,8 @@ public class MainActivity extends AppCompatActivity {
             //player loses
             //take to win/lose screen
             setContentView(R.layout.lose);
+            Intent myIntent = new Intent(MainActivity.this, lose.class);
+            startActivity(myIntent);
             return;
         }
         cPlayerCard = playerDeck.draw();
@@ -326,6 +334,8 @@ public class MainActivity extends AppCompatActivity {
             //take to win/lose screen
             Log.d("Empty Deck", "Coms deck is empty!! Switching layouts... ");
             setContentView(R.layout.winner);
+            Intent myIntent = new Intent(MainActivity.this, Win.class);
+            startActivity(myIntent);
             return;
         }
         cComCard = comDeck.draw();
