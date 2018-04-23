@@ -177,7 +177,7 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
                 i = 0;
                 for (ImageView img: playerFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 1200f - i*50);
+                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", (x+100) - i*50);
                     aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", 100);
                     aniX.setDuration(1000+i*50); //milli
                     aniY.setDuration(1000+i*50); //milli
@@ -222,8 +222,8 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
 
                 for (ImageView img: playerFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", x);
-                    aniY = ObjectAnimator.ofFloat(playerFaceDownCards[i],"y", y);
+                    aniX = ObjectAnimator.ofFloat(img,"x", x);
+                    aniY = ObjectAnimator.ofFloat(img,"y", y);
                     aniX.setDuration(1000+i*50); //milli
                     aniY.setDuration(1000+i*50); //milli
                     set = new AnimatorSet();
@@ -235,8 +235,8 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
                 i = 0;
                 for (ImageView img: comFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", x );
-                    aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", y);
+                    aniX = ObjectAnimator.ofFloat(img,"x", x );
+                    aniY = ObjectAnimator.ofFloat(img,"y", y);
                     aniX.setDuration(1000+i*50); //milli
                     aniY.setDuration(1000+i*50); //milli
                     set = new AnimatorSet();

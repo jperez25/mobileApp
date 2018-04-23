@@ -400,9 +400,6 @@ public class MainActivity extends AppCompatActivity {
             //clear cards in hold
             cards.clear();
 
-            //Animations.moveCards(playerCardImg, pnewCard, 0);
-            //Animations.moveCards(comCardImg, cnewCard, 0);
-
             anime.moveCards(playerCardImg, pnewCard, 0);
             anime.moveCards(comCardImg, cnewCard, 0);
 
@@ -424,9 +421,6 @@ public class MainActivity extends AppCompatActivity {
                 playerDeck.add(x);
             }
             cards.clear();
-
-            //Animations.moveCards(playerCardImg, pnewCard, 1);
-            //Animations.moveCards(comCardImg, cnewCard, 1);
 
             anime.moveCards(playerCardImg, pnewCard, 1);
             anime.moveCards(comCardImg, cnewCard, 1);
