@@ -241,19 +241,20 @@ public class MainActivity extends AppCompatActivity {
         pnewCard.setImageResource(playerCardId);
         cnewCard.setImageResource(comCardId);
 
-        pnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
-        pnewCard.setMinimumHeight(80);
-        pnewCard.setMinimumWidth(53);
+        pnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(300,250));
+        pnewCard.setMinimumHeight(120);
+        pnewCard.setMinimumWidth(80);
 //        pnewCard.setMaxHeight(80);
 //        pnewCard.setMaxWidth(53);
         pnewCard.setImageResource(playerCardId);
         pnewCard.setX(1200);
         pnewCard.setY(1600);
 
-        cnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
+        cnewCard.setLayoutParams(new android.view.ViewGroup.LayoutParams(300,250));
 //        cnewCard.setMaxHeight(80);
 //        cnewCard.setMaxWidth(53);
-        cnewCard.setImageResource(comCardId);
+        pnewCard.setMinimumHeight(120);
+        pnewCard.setMinimumWidth(80);
         cnewCard.setX(100);
         cnewCard.setY(100);
 

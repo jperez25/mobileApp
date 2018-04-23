@@ -117,7 +117,7 @@ public class Animations {
                 int i = 0;
                 for (ImageView img: playerFaceDownCards) {
                     playerFaceDownCards[i] = new ImageView(cx);
-                    playerFaceDownCards[i].setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
+                    playerFaceDownCards[i].setLayoutParams(new android.view.ViewGroup.LayoutParams(300,250));
                     playerFaceDownCards[i].setMaxHeight(80);
                     playerFaceDownCards[i].setMaxWidth(53);
                     playerFaceDownCards[i].setImageResource(R.drawable.back_card);
@@ -147,7 +147,7 @@ public class Animations {
                 i = 0;
                 for (ImageView img: playerFaceDownCards) {
                     comFaceDownCards[i] = new ImageView(cx);
-                    comFaceDownCards[i].setLayoutParams(new android.view.ViewGroup.LayoutParams(100,100));
+                    comFaceDownCards[i].setLayoutParams(new android.view.ViewGroup.LayoutParams(300,250));
                     comFaceDownCards[i].setMaxHeight(80);
                     comFaceDownCards[i].setMaxWidth(53);
                     comFaceDownCards[i].setImageResource(R.drawable.back_card);
@@ -184,6 +184,7 @@ public class Animations {
         ObjectAnimator aniX;
         ObjectAnimator aniY;
         AnimatorSet set;
+        int i = 0;
         switch (winner){
             //player
             case 0:
@@ -195,7 +196,14 @@ public class Animations {
                 set.playTogether(aniX,aniY);
                 set.start();
 
-                int i = 0;
+                aniX = ObjectAnimator.ofFloat(oldImg,"x", 1100f);
+                aniY = ObjectAnimator.ofFloat(oldImg,"y", 1600f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
                 for (ImageView img: playerFaceDownCards) {
                     //initialize animation
                     aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 1100f);
@@ -207,6 +215,7 @@ public class Animations {
                     set.start();
                     i++;
                 }
+
                 i = 0;
                 for (ImageView img: comFaceDownCards) {
                     //initialize animation
@@ -231,11 +240,19 @@ public class Animations {
                 set.playTogether(aniX,aniY);
                 set.start();
 
+                aniX = ObjectAnimator.ofFloat(oldImg,"x", 100f);
+                aniY = ObjectAnimator.ofFloat(oldImg,"y", 100f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
                 i = 0;
-                for (ImageView img: playerFaceDownCards) {
+                for (ImageView img: comFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(comFaceDownCards[i],"x", 100f);
-                    aniY = ObjectAnimator.ofFloat(comFaceDownCards[i],"y", 100f);
+                    aniX = ObjectAnimator.ofFloat(img,"x", 100f);
+                    aniY = ObjectAnimator.ofFloat(img,"y", 100f);
                     aniX.setDuration(1000+i*50); //milli
                     aniY.setDuration(1000+i*50); //milli
                     set = new AnimatorSet();
@@ -244,11 +261,11 @@ public class Animations {
                     i++;
                 }
 
-                i= 0;
+                i = 0;
                 for (ImageView img: playerFaceDownCards) {
                     //initialize animation
-                    aniX = ObjectAnimator.ofFloat(playerFaceDownCards[i],"x", 100f );
-                    aniY = ObjectAnimator.ofFloat(playerFaceDownCards[i],"y", 100f);
+                    aniX = ObjectAnimator.ofFloat(img,"x", 100f );
+                    aniY = ObjectAnimator.ofFloat(img,"y", 100f);
                     aniX.setDuration(1000+i*50); //milli
                     aniY.setDuration(1000+i*50); //milli
                     set = new AnimatorSet();
