@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     String str;
 
     AsyncAnimations anime;
+    ConstraintLayout mainLayout;
 
     boolean isReadyforBattle;
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         anime = new AsyncAnimations();
 
@@ -261,25 +263,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void afterBattle(){
+        Log.d("after battle", "afterBattle: ");
         playerCardImg.setVisibility(View.INVISIBLE);
+        playerCardImg.setImageDrawable(null);
         comCardImg.setVisibility(View.INVISIBLE);
+        comCardImg.setImageDrawable(null);
         try{
             if (cnewCard.getVisibility() == View.VISIBLE){
+
                 cnewCard.setVisibility(View.INVISIBLE);
+                cnewCard.setImageDrawable(null);
             }
             if (pnewCard.getVisibility() == View.VISIBLE){
                 pnewCard.setVisibility(View.INVISIBLE);
+                pnewCard.setImageDrawable(null);
             }
-            if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
+//            if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
                 for (ImageView img: anime.playerFaceDownCards) {
                     img.setVisibility(View.INVISIBLE);
+                    img.setImageDrawable(null);
                 }
-            }
-            if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
+//            }
+//            if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
                 for (ImageView img: anime.comFaceDownCards) {
                     img.setVisibility(View.INVISIBLE);
+                    img.setImageDrawable(null);
                 }
-            }
+//            }
         }
         catch (NullPointerException e){
             Log.d("NULL", "newCard wasnt created");
@@ -292,9 +302,10 @@ public class MainActivity extends AppCompatActivity {
         //com 1
         anime.tieAnimation(comCardImg,1);
         anime.tieAnimation(playerCardImg,0);
-
+        Log.d("Images", "Generating Images: ");
         anime.generateImages(layout, getApplicationContext(),0);
         anime.generateImages(layout, getApplicationContext(),1);
+        Log.d("Images", "Images Generated: ");
 
         //draw three cards and put them on hold
         cards = new LinkedList<>();
@@ -450,19 +461,22 @@ public class MainActivity extends AppCompatActivity {
         try{
             if (cnewCard.getVisibility() == View.VISIBLE){
                 cnewCard.setVisibility(View.INVISIBLE);
+                cnewCard.setImageDrawable(null);
             }
             if (pnewCard.getVisibility() == View.VISIBLE){
                 pnewCard.setVisibility(View.INVISIBLE);
+                pnewCard.setImageDrawable(null);
             }
             if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
                 for (ImageView img: anime.playerFaceDownCards) {
                     img.setVisibility(View.INVISIBLE);
+                    img.setImageDrawable(null);
                 }
             }
             if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
                 for (ImageView img: anime.comFaceDownCards) {
                     img.setVisibility(View.INVISIBLE);
-                }
+                    img.setImageDrawable(null);                }
             }
         }
         catch (NullPointerException e){
