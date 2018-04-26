@@ -12,8 +12,8 @@ import android.widget.ImageView;
 public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
 
     static private ConstraintLayout layout;
-    public ImageView playerFaceDownCards[];
-    public ImageView comFaceDownCards[];
+    public ImageView playerFaceDownCards[] = new ImageView[3];
+    public ImageView comFaceDownCards[]= new ImageView[3];
 
     //Player deck Coordinates
     static float x = 950;
@@ -86,44 +86,12 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
         }
     }
 
-    public void tieAnimation(ImageView img, int who){
-        ObjectAnimator aniX;
-        ObjectAnimator aniY;
-        AnimatorSet set;
-        switch (who){
-            //player
-            case 0:
-                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 1000f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-
-                break;
-            //computer
-            case 1:
-                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
-                aniY = ObjectAnimator.ofFloat(img,"y", 600f);
-                aniX.setDuration(1000); //milli
-                aniY.setDuration(1000); //milli
-                set = new AnimatorSet();
-                set.playTogether(aniX,aniY);
-                set.start();
-
-
-                break;
-        }
-
-    }
-
     public void generateImages(ConstraintLayout lay, Context cx, int who){
         layout = lay;
-        playerFaceDownCards = new ImageView[3];
-        comFaceDownCards = new ImageView[3];
+
         ObjectAnimator aniX;
         ObjectAnimator aniY;
+
         AnimatorSet set;
 
         switch (who){
@@ -190,9 +158,36 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
         }
     }
 
-    public void removeImages(ImageView pnewCard, ImageView cnewCard)  {
-        cnewCard.setVisibility(View.INVISIBLE);
-        pnewCard.setVisibility(View.INVISIBLE);
+    public void tieAnimation(ImageView img, int who){
+        ObjectAnimator aniX;
+        ObjectAnimator aniY;
+        AnimatorSet set;
+        switch (who){
+            //player
+            case 0:
+                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
+                aniY = ObjectAnimator.ofFloat(img,"y", 1000f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
+                break;
+            //computer
+            case 1:
+                aniX = ObjectAnimator.ofFloat(img,"x", 100f);
+                aniY = ObjectAnimator.ofFloat(img,"y", 600f);
+                aniX.setDuration(1000); //milli
+                aniY.setDuration(1000); //milli
+                set = new AnimatorSet();
+                set.playTogether(aniX,aniY);
+                set.start();
+
+
+                break;
+        }
+
     }
 
     public void moveCards(ImageView oldImg, ImageView newImg, int winner){
@@ -293,5 +288,19 @@ public class AsyncAnimations extends AsyncTask<Integer, Void, Void> {
                 break;
         }
 
+    }
+
+    public void removeImages()  {
+        int x = playerFaceDownCards.length;
+        if (playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
+            for (ImageView img: playerFaceDownCards) {
+                img.setVisibility(View.INVISIBLE);
+            }
+        }
+        if (comFaceDownCards[0].getVisibility() == View.VISIBLE ){
+            for (ImageView img: comFaceDownCards) {
+                img.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 }

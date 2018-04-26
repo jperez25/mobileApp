@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             //after battle
             case 2:
-                //kind of redundant and not useful
+                //Destroy the cards
                 afterBattle();
                 phases = 0;
                 break;
@@ -183,8 +183,6 @@ public class MainActivity extends AppCompatActivity {
         str = "Computer " + comDeck.size();
         computer.setText(str);
 
-        //Animations.playAnimation(playerCardImg, 0);
-        //Animations.playAnimation(comCardImg, 1);
 
         anime.playAnimation(playerCardImg,0);
         anime.playAnimation(comCardImg,1);
@@ -263,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
     private void afterBattle(){
         playerCardImg.setVisibility(View.INVISIBLE);
         comCardImg.setVisibility(View.INVISIBLE);
+
         try{
             if (cnewCard.getVisibility() == View.VISIBLE){
                 cnewCard.setVisibility(View.INVISIBLE);
@@ -270,21 +269,12 @@ public class MainActivity extends AppCompatActivity {
             if (pnewCard.getVisibility() == View.VISIBLE){
                 pnewCard.setVisibility(View.INVISIBLE);
             }
-            if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
-                for (ImageView img: anime.playerFaceDownCards) {
-                    img.setVisibility(View.INVISIBLE);
-                }
-            }
-            if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
-                for (ImageView img: anime.comFaceDownCards) {
-                    img.setVisibility(View.INVISIBLE);
-                }
-            }
+            anime.removeImages();
         }
         catch (NullPointerException e){
-            Log.d("NULL", "newCard wasnt created");
+            Log.d("NULL2", "destroy didnt work");
+            Log.d("Error", e.getMessage());
         }
-
     }
 
     private void setCardsForTieBattle(){
@@ -428,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
             cards.add(cComCard);
 
             for (Card x: cards) {
-                playerDeck.add(x);
+                comDeck.add(x);
             }
             cards.clear();
 
@@ -447,6 +437,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void destroyExtraCards(){
+        playerCardImg.setVisibility(View.INVISIBLE);
+        comCardImg.setVisibility(View.INVISIBLE);
         try{
             if (cnewCard.getVisibility() == View.VISIBLE){
                 cnewCard.setVisibility(View.INVISIBLE);
@@ -454,19 +446,11 @@ public class MainActivity extends AppCompatActivity {
             if (pnewCard.getVisibility() == View.VISIBLE){
                 pnewCard.setVisibility(View.INVISIBLE);
             }
-            if (anime.playerFaceDownCards[0].getVisibility() == View.VISIBLE ){
-                for (ImageView img: anime.playerFaceDownCards) {
-                    img.setVisibility(View.INVISIBLE);
-                }
-            }
-            if (anime.comFaceDownCards[0].getVisibility() == View.VISIBLE ){
-                for (ImageView img: anime.comFaceDownCards) {
-                    img.setVisibility(View.INVISIBLE);
-                }
-            }
+            anime.removeImages();
         }
         catch (NullPointerException e){
-            Log.d("NULL", "destroy didnt work");
+            Log.d("NULL2", "destroy didnt work");
+            Log.d("Error", e.getMessage());
         }
     }
 
